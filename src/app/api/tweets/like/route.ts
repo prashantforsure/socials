@@ -34,7 +34,7 @@ const createLike = await prisma.like.create({
     }
   })
     } catch(error){
-        console.error('Error deleting tweet:', error);
-      return res.status(500).json({ message: 'An error occurred while deleting the tweet.' });
+        console.error('Error liking tweet:', error);
+      return res.status(500).json({ message: 'An error occurred while linking' });
     }
 }
