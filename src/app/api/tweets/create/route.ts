@@ -14,18 +14,17 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
     try{
 const session: Session | null = await getSession({req});
 if(!session){
-    res.status(400).json({
+  return  res.status(400).json({
         message: 'user session has been not found'
     })
 }
 
-// @ts-ignore
+
 const email = session.user?.email;
 
 if (!email) {
   return res.status(400).json({ message: 'Email is missing from session.' });
 }
-
 
 const {content} = req.body;
 

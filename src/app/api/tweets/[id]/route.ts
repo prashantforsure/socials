@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 const prisma = new PrismaClient();
 import { Session } from 'next-auth';
+
 export async function DELETE(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'DELETE') {
       return res.status(405).json({ message: 'Method not allowed' });
@@ -39,7 +40,7 @@ export async function DELETE(req: NextApiRequest, res: NextApiResponse) {
         return res.status(400).json({ message: 'Invalid session user ID' });
       }
   
-      if (tweet.author.id !== session.user.id) {
+      if (tweet.author.id !== sessionUserId) {
         return res.status(403).json({ message: "Forbidden: You don't have permission to delete this tweet" });
       }
   
