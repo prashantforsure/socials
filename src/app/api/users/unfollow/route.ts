@@ -13,7 +13,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
     }
     const sessionUserId = parseInt(session.user.id, 10);
     const { followingId } = req.body;
-    const Follow = await prisma.follows.findUnique({
+    const follow = await prisma.follows.findUnique({
     where: {
         followerId_followingId: {
             followerId: sessionUserId,
@@ -21,7 +21,19 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
         }
     }
     })
-   
+    if (!follow) {
+        return res.status(400).json({ error: "Not following the user" });
+      }
+  
+      await prisma.follows.delete({
+        where: {
+          id: follow.id,
+        },
+      });
+  
+      return res.status(204).end();
     }
+  
+    
   
 
