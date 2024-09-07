@@ -12,4 +12,5 @@ export async function GET(req: NextApiRequest, res: NextApiResponse){
         follower: true,
       },
     });
+    return res.status(200).json(followers.map(f => f.follower));
 }
