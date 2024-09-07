@@ -9,7 +9,7 @@ interface Tweettype {
     content: string
 }
 
-export async function Post(req: NextApiRequest, res: NextApiResponse){
+export async function POST(req: NextApiRequest, res: NextApiResponse){
 
     try{
 const session: Session | null = await getSession({req});
@@ -43,6 +43,7 @@ res.status(200).json({
     message: "tweet has been created"
 })
     } catch(error){
-     message: "something went wrong try again"
+        console.error('Error creating tweet:', error);
+        res.status(500).json({ message: 'An error occurred while creating the tweet.' });
     }
 }

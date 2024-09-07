@@ -9,7 +9,7 @@ interface RequestBody {
   }
 
 const prisma = new PrismaClient();
-export async function Post(req: NextApiRequest, res: NextApiResponse){
+export async function POST(req: NextApiRequest, res: NextApiResponse){
 const {email, password, name}: RequestBody = req.body;
 
 const hashedpassword = await bcrypt.hash(password,10);
@@ -24,8 +24,7 @@ const user = await prisma.user.create({
 })
 res.status(201).json(user);
 } catch(error){
-res.status(400).json({
-    error: "user has not been created"
-})
+    console.error('Error creating tweet:', error);
+    res.status(500).json({ message: 'An error occurred while creating the user.' });
 }
 }
