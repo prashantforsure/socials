@@ -1,10 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
-import { SocialIcon } from 'react-social-icons/component'
-import { IoMdHome } from "react-icons/io";
+
 import { CgProfile } from "react-icons/cg";
-import { IoIosCreate } from "react-icons/io";
-import { Button } from "@/components/ui/button"
 
 const Sidebar = () => {
   return (
