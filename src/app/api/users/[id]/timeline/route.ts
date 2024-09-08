@@ -16,4 +16,24 @@ export async function GET(req: NextApiRequest, res: NextApiResponse){
         select: { followingId: true },
       });
       
-}
+      const followingIds = following.map(f => f.followingId);
+
+    const timelineTweets = await prisma.tweet.findMany({
+      where: {
+        OR: [
+          { authorId: { in: followingIds } },
+          { authorId: parseInt(id as string, 10) },
+        ],
+      },
+      include: {
+        author: true,
+        likes: true,
+        retweets: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return res.status(200).json(timelineTweets);
+  }
