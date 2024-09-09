@@ -28,7 +28,7 @@ interface Author {
     // Add other tweet properties as needed
   }
   
-  const TweetDetail: React.FC = () => {
+ async function page({ params: { id } }: { params: { id: string } } ) {
     const [tweet, setTweet] = useState<Tweet | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -37,8 +37,7 @@ interface Author {
     useEffect(() => {
       const fetchTweet = async () => {
        
-  //@ts-ignore
-        const id = router.query
+
         if (typeof id !== 'string') {
           setError('Invalid tweet ID');
           setIsLoading(false);
@@ -57,7 +56,7 @@ interface Author {
       };
   
       fetchTweet();
-      //@ts-ignore
+      
     }, [id]);
   
     if (isLoading) {
@@ -86,4 +85,4 @@ interface Author {
     );
   };
   
-  export default TweetDetail;
+  export default page;
