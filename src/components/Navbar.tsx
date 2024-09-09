@@ -20,6 +20,7 @@ const Navbar = () => {
     <Button variant="outline">Outline</Button>
     </Link>
 </div>
+this is nav bar
 
 </div>
    
